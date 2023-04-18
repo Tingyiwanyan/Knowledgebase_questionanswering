@@ -25,18 +25,29 @@ class info_extractor():
     x = ''
     y = ''
     z = ''
+    pre_tok_text = ''
+    pre_tok_dep = ''
+    suf_tok_text = ''
+    suf_tok_dep = ''
+    prefix = ''
+    suffix = ''
+    modifier = ''
+
 
     # if subjpass == 1 then sentence is passive
     if subjpass == 1:
       for i,tok in enumerate(doc):
-        if tok.dep_.find("subjpass") == True:
-          y = tok.text
+        if not tok.dep_ == "punct":
+          if tok.dep_.endswith("mod"):
+            prefix = prefix + " " + tok.text
+          if tok.dep_.find("subjpass") == True:
+            y = tok.text
 
-        if tok.dep_.endswith("obj") == True:
-          x = tok.text
+          if tok.dep_.endswith("obj") == True:
+            x = tok.text
 
-        if tok.dep_.find("ROOT") == True:
-          z = tok.text
+          if tok.dep_.endswith("ROOT") == True:
+            z = tok.text
     
     # if subjpass == 0 then sentence is not passive
     else:
@@ -47,7 +58,7 @@ class info_extractor():
         if tok.dep_.endswith("obj") == True:
           y = tok.text
 
-        if tok.dep_.find("root") == True:
+        if tok.dep_.endswith("root") == True:
           z = tok.text
 
     return x,y,z
