@@ -58,7 +58,7 @@ class info_extractor():
         if tok.dep_.endswith("obj") == True:
           y = tok.text
 
-        if tok.dep_.endswith("root") == True:
+        if tok.dep_.endswith("ROOT") == True:
           z = tok.text
 
     return x,y,z
