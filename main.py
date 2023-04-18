@@ -1,4 +1,4 @@
-from utility import info_extractor
+from utility.infor_extraction import info_extractor
 
 
 if __name__ == '__main__':
