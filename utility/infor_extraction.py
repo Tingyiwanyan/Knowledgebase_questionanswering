@@ -11,9 +11,9 @@ class info_extractor():
     #text = "GDP in developing countries such as Vietnam will continue growing at a high rate." 
 
 # create a spaCy object 
-  def subtree_matcher(text):
+  def subtree_matcher(self, text):
 
-    doc = nlp(text)
+    doc = self.nlp(text)
 
     subjpass = 0
 
