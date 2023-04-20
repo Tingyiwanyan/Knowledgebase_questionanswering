@@ -43,8 +43,8 @@ class info_extractor():
                {'DEP':'obj'}]
 
     matcher.add("matching_1", [pattern])
-    matcher = matcher(doc)
-
+    self.matchers = matcher(doc)
+    
 
 
     """
