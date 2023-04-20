@@ -33,9 +33,21 @@ class info_extractor():
     suffix = ''
     modifier = ''
 
+    matcher = Matcher(self.nlp.vocab)
+
 
     # if subjpass == 1 then sentence is passive
-    if subjpass == 1:
+    #if subjpass == 1:
+    pattern = [{'DEP':'subj','OP':"?"},
+               {'DPE':'ROOT','OP':"?"},
+               {'DPE':'obj'}]
+
+    matcher.add("matching_1", None, pattern)
+    matcher = matcher(doc)
+
+
+
+      """
       for i,tok in enumerate(doc):
         if not tok.dep_ == "punct":
           if tok.dep_.endswith("mod"):
@@ -48,8 +60,10 @@ class info_extractor():
 
           if tok.dep_.endswith("ROOT") == True:
             z = tok.text
+      """
     
     # if subjpass == 0 then sentence is not passive
+    """
     else:
       for i,tok in enumerate(doc):
         if tok.dep_.endswith("subj") == True:
@@ -60,5 +74,5 @@ class info_extractor():
 
         if tok.dep_.endswith("ROOT") == True:
           z = tok.text
-
-    return x,y,z
+    """
+    #return x,y,z
