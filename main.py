@@ -1,4 +1,5 @@
 from utility.infor_extraction import info_extractor
+from spacy import displacy
 
 
 if __name__ == '__main__':
