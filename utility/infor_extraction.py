@@ -42,7 +42,7 @@ class info_extractor():
                {'DPE':'ROOT','OP':"?"},
                {'DPE':'obj'}]
 
-    matcher.add("matching_1", None, pattern)
+    matcher.add("matching_1", [pattern])
     matcher = matcher(doc)
 
 
