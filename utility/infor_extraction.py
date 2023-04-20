@@ -14,10 +14,10 @@ class info_extractor():
   def entity_matcher(self):
     matcher = Matcher(self.nlp.vocab)
     # Add match ID "HelloWorld" with no callback and one pattern
-    pattern = [{"LOWER": "hello"}, {"IS_PUNCT": True}, {"LOWER": "world"}]
+    pattern = [{"LOWER": "is"}, {"IS_PUNCT": True}, {"LOWER": "world"}]
     matcher.add("HelloWorld", [pattern])
 
-    doc = self.nlp("Hello, world! Hello world!")
+    doc = self.nlp("Hello , is world! Hello world!")
     matches = matcher(doc)
     for match_id, start, end in matches:
         string_id = self.nlp.vocab.strings[match_id]  # Get string representation
