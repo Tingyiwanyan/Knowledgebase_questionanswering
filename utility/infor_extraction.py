@@ -39,8 +39,8 @@ class info_extractor():
     # if subjpass == 1 then sentence is passive
     #if subjpass == 1:
     pattern = [{'DEP':'subj','OP':"?"},
-               {'DPE':'ROOT','OP':"?"},
-               {'DPE':'obj'}]
+               {'DEP':'ROOT','OP':"?"},
+               {'DEP':'obj'}]
 
     matcher.add("matching_1", [pattern])
     matcher = matcher(doc)
