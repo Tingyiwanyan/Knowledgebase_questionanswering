@@ -12,7 +12,7 @@ class info_extractor():
 
 # create a spaCy object 
   def entity_matcher(self):
-    matcher = Matcher(nlp.vocab)
+    matcher = Matcher(self.nlp.vocab)
     # Add match ID "HelloWorld" with no callback and one pattern
     pattern = [{"LOWER": "hello"}, {"IS_PUNCT": True}, {"LOWER": "world"}]
     matcher.add("HelloWorld", [pattern])
