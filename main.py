@@ -7,4 +7,4 @@ if __name__ == '__main__':
 	text = "GDP in developing countries such as Vietnam will continue growing at a high rate." 
 	text2 = "Tableau was recently acquired by Salesforce." 
 	text3 = "AnalyticsVidhya is the largest community of data scientists and provides best resources for understanding data and analytics."
-	info_ext.subtree_matcher(text)
+	matcher = info_ext.subtree_matcher(text)
