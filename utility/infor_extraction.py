@@ -11,6 +11,19 @@ class info_extractor():
     #text = "GDP in developing countries such as Vietnam will continue growing at a high rate." 
 
 # create a spaCy object 
+  def entity_matcher(self):
+    matcher = Matcher(nlp.vocab)
+    # Add match ID "HelloWorld" with no callback and one pattern
+    pattern = [{"LOWER": "hello"}, {"IS_PUNCT": True}, {"LOWER": "world"}]
+    matcher.add("HelloWorld", [pattern])
+
+    doc = self.nlp("Hello, world! Hello world!")
+    matches = matcher(doc)
+    for match_id, start, end in matches:
+        string_id = self.nlp.vocab.strings[match_id]  # Get string representation
+        span = doc[start:end]  # The matched span
+        print(match_id, string_id, start, end, span.text)
+
   def subtree_matcher(self, text):
 
     doc = self.nlp(text)
