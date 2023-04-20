@@ -47,20 +47,20 @@ class info_extractor():
 
 
 
-      """
-      for i,tok in enumerate(doc):
-        if not tok.dep_ == "punct":
-          if tok.dep_.endswith("mod"):
-            prefix = prefix + " " + tok.text
-          if tok.dep_.find("subjpass") == True:
-            y = tok.text
+    """
+    for i,tok in enumerate(doc):
+      if not tok.dep_ == "punct":
+        if tok.dep_.endswith("mod"):
+          prefix = prefix + " " + tok.text
+        if tok.dep_.find("subjpass") == True:
+          y = tok.text
 
-          if tok.dep_.endswith("obj") == True:
-            x = tok.text
+        if tok.dep_.endswith("obj") == True:
+          x = tok.text
 
-          if tok.dep_.endswith("ROOT") == True:
-            z = tok.text
-      """
+        if tok.dep_.endswith("ROOT") == True:
+          z = tok.text
+    """
     
     # if subjpass == 0 then sentence is not passive
     """
