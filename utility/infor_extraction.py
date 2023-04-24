@@ -7,10 +7,20 @@ from spacy.matcher import Matcher
 class info_extractor():
   def __init__(self):
     self.nlp = spacy.load("en_core_web_sm")
+    self.sentence_structure = {}
+    self.sentence_structure["prefix"] = []
+    self.sentence_structure["suffix"] = []
+    self.sentence_structure["conj_suffix"] = []
+    self.sentence_structure["verb_relation"] = []
+    self.sentence_structure["verb_conj_relation"] = []
 
-    #text = "GDP in developing countries such as Vietnam will continue growing at a high rate." 
+  def purge_sentence_structure(self):
+    self.sentence_structure["prefix"] = []
+    self.sentence_structure["suffix"] = []
+    self.sentence_structure["conj_suffix"] = []
+    self.sentence_structure["verb_relation"] = []
+    self.sentence_structure["verb_conj_relation"] = []
 
-# create a spaCy object 
   def entity_matcher(self):
     matcher = Matcher(self.nlp.vocab)
     # Add match ID "HelloWorld" with no callback and one pattern
@@ -24,66 +34,63 @@ class info_extractor():
         span = doc[start:end]  # The matched span
         print(match_id, string_id, start, end, span.text)
 
-  def subtree_matcher(self, text):
+  def construct_triples(self,texts):
+    doc = self.nlp(texts)
 
-    doc = self.nlp(text)
+    for tok in doc:
+      if tok.dep_.endswith("ROOT") == True:
+        root = tok
 
-    subjpass = 0
+    self.recursive_dependency(root)
 
-    for i,tok in enumerate(doc):
-      # find dependency tag that contains the text "subjpass"    
-      if tok.dep_.find("subjpass") == True:
-        subjpass = 1
-
-    x = ''
-    y = ''
-    z = ''
-    pre_tok_text = ''
-    pre_tok_dep = ''
-    suf_tok_text = ''
-    suf_tok_dep = ''
-    prefix = ''
-    suffix = ''
-    modifier = ''
-
-    matcher = Matcher(self.nlp.vocab)
-
-
-    # if subjpass == 1 then sentence is passive
-    #if subjpass == 1:
-    pattern = [{"LOWER":"is"}]
-
-    matcher.add("matching_1", [pattern])
-    self.matchers = matcher(doc)
-    
+  def right_conj_suffix_recur(self, token):
+    verb_text = []
+    verb_text.append(token.text)
+    for subtok in token.lefts:
+      if not subtok.dep_ == "cc" and not subtok.dep_ == "punct":
+        if list(subtok.children) == []:
+          if subtok.dep_ == "aux":
+            verb_text.insert(0,subtok.text)
+    self.sentence_structure["verb_conj_relation"].append(verb_text)
+    for subtok in token.rights:
+      if not subtok.dep_ == "cc" and not subtok.dep_ == "punct":
+        if subtok.dep_ == "conj":
+          self.right_conj_suffix_recur(subtok)
+        else:
+          self.sentence_structure["conj_suffix"].append(list(subtok.subtree))
 
 
-    """
-    for i,tok in enumerate(doc):
-      if not tok.dep_ == "punct":
-        if tok.dep_.endswith("mod"):
-          prefix = prefix + " " + tok.text
-        if tok.dep_.find("subjpass") == True:
-          y = tok.text
+  def recursive_dependency(self,root):
 
-        if tok.dep_.endswith("obj") == True:
-          x = tok.text
+    verb_text = []
+    verb_text.append(root.text)
+    for tok in root.lefts:
+      if not tok.dep_ == "cc" and not tok.dep_ == "punct":
+        if list(tok.children) == []:
+          if not tok.dep_.endswith("subj") and not tok.dep_.endswith("obj") and not tok.dep_.endswith("subjpass"):
+            verb_text.insert(0,tok.text)
+          else:
+            subtrees = list(tok.subtree)
+            self.sentence_structure["prefix"].append(subtrees)
+        else:
+          subtrees = list(tok.subtree)
+          self.sentence_structure["prefix"].append(subtrees)
+    #verb_text.append("root")
+    self.sentence_structure["verb_relation"].append(verb_text)
+    verb_text = []
+    for tok in root.rights:
+      if not tok.dep_ == "cc" and not tok.dep_ == "punct":
+        if tok.dep_.endswith("conj"):
+          self.right_conj_suffix_recur(tok)
+        else:
+          print(tok.text)
+          self.sentence_structure["suffix"].append(list(tok.subtree))
 
-        if tok.dep_.endswith("ROOT") == True:
-          z = tok.text
-    """
-    
-    # if subjpass == 0 then sentence is not passive
-    """
-    else:
-      for i,tok in enumerate(doc):
-        if tok.dep_.endswith("subj") == True:
-          x = tok.text
+    if not verb_text == []:
+      #verb_text.append("conj")
+      self.sentence_structure["verb_relation"].append(verb_text)
+      verb_text = []
 
-        if tok.dep_.endswith("obj") == True:
-          y = tok.text
 
-        if tok.dep_.endswith("ROOT") == True:
-          z = tok.text
-    """
-    #return x,y,z
+
+
