@@ -34,6 +34,11 @@ class info_extractor():
         span = doc[start:end]  # The matched span
         print(match_id, string_id, start, end, span.text)
 
+  def print_dep_tree(self, texts):
+    doc = self.nlp(texts)
+    for tok in doc:
+      print(tok.head.text,"-->",tok.text,"-->",tok.dep_,"-->",tok.pos_)
+
   def construct_triples(self,texts):
     doc = self.nlp(texts)
 
