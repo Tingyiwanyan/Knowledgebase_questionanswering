@@ -25,7 +25,9 @@ class kg_construct(info_extractor):
 			with open(filepath, 'wb') as fd:
 				for chunk in response.iter_content(chunk_size=123):
 					fd.write(chunk)
-					
+		except:
+			pass
+
 
 	def read_pdf(self, filepath):
 		reader = PdfReader(filepath)
