@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from pyspark.sql import SparkSession
 import pandas as pd
-from infor_extraction import info_extractor
+from utility.infor_extraction import info_extractor
 from PyPDF2 import PdfReader
 import requests
 import urllib
