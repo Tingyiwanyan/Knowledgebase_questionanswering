@@ -19,7 +19,7 @@ class kg_construct(info_extractor):
 		file = open(filepath, "wb")
 		file.write(response.read())
 		file.close()
-		response = request.get(url, stream=True)
+		#response = request.get(url, stream=True)
 
 		#try:
 		#	with open(filepath, 'wb') as fd:
