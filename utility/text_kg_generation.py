@@ -10,9 +10,6 @@ import re
 
 class kg_construct(info_extractor):
 	def __init__(self):
-    	"""
-		Initiate spark session
-		"""
 		self.spark = SparkSession.builder.enableHiveSupport().getOrCreate()
 
 		self.spark.sql("CREATE DATABASE IF NOT EXISTS graph_database")
