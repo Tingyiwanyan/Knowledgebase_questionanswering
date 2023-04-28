@@ -31,7 +31,7 @@ class kg_construct(info_extractor):
 
 	def read_pdf(self, filepath):
 		self.reader = PdfReader(filepath)
-		page = reader.pages[0]
+		page = self.reader.pages[0]
 		self.text = page.extract_text()
 
 	def text_clean(self):
