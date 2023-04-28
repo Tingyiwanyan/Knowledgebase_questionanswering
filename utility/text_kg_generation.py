@@ -30,9 +30,13 @@ class kg_construct(info_extractor):
 
 
 	def read_pdf(self, filepath):
-		reader = PdfReader(filepath)
+		self.reader = PdfReader(filepath)
 		page = reader.pages[0]
 		self.text = page.extract_text()
+
+	def text_clean(self)
+		self.text.replace("\n", " ")
+		self.text.replace("\x03", " ")
 
 	def import_text(self, text):
 		self.text = text
@@ -47,9 +51,6 @@ class kg_construct(info_extractor):
 		#time = data['time']
 		columns = ["source","relation","target"]
 		data = [(source,relation,target)]
-		#print(target)
-		#target = ''.join(target.splitlines())
-		#print(target)
 		df_temp = spark.sparkContext.parallelize(data).toDF(columns)
 		tables = self.spark.catalog.listTables("graph_database")
 		if "triple_relation" in [table.name for table in tables]:
