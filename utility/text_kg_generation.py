@@ -15,10 +15,17 @@ class kg_construct(info_extractor):
 		self.spark.sql("CREATE DATABASE IF NOT EXISTS graph_database")
 
 	def download_pdf(self, url, filepath):
-		response = urllib.request.urlopen(url)
-		file = open(filepath, "wb")
-		file.write(response.read())
-		file.close()
+		#response = urllib.request.urlopen(url)
+		#file = open(filepath, "wb")
+		#file.write(response.read())
+		#file.close()
+		response = request.get(url, stream=True)
+
+		try:
+			with open(filepath, 'wb') as fd:
+				for chunk in response.iter_content(chunk_size=123):
+					fd.write(chunk)
+					
 
 	def read_pdf(self, filepath):
 		reader = PdfReader(filepath)
