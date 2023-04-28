@@ -15,7 +15,7 @@ if __name__ == '__main__':
 	text8 = "The accident happened as the night was falling"
 	text9 = "what is watercycle"
 	text10 = "john scored 98"
-	sample_url = "https://s22.q4cdn.com/959853165/files/doc_financials/2021/q4/da27d24b-9358-4b5c-a424-6da061d91836.pdf"
+	sample_url = "https://arxiv.org/pdf/2203.02155.pdf"
 
 	kg = kg_construct()
 	#info_ext.entity_matcher()
