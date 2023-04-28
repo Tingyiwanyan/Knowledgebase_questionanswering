@@ -32,7 +32,7 @@ class kg_construct(info_extractor):
 	def read_pdf(self, filepath):
 		reader = PdfReader(filepath)
 		page = reader.pages[0]
-		self.text_extract = page.extract_text()
+		self.text = page.extract_text()
 
 	def import_text(self, text):
 		self.text = text
@@ -62,7 +62,7 @@ class kg_construct(info_extractor):
 		"""
 		generate each individual sentence from paragraph
 		"""
-		self.sentences = [x for x in re.split("[//.|//!|//?]", self.text) if x!=""]
+		self.sentences = [x for x in re.split("[//.|//!|//?|\n]", self.text) if x!=""]
 
 
 
