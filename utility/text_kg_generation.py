@@ -35,8 +35,8 @@ class kg_construct(info_extractor):
 		self.text = page.extract_text()
 
 	def text_clean(self):
-		self.text.replace("\n", " ")
-		self.text.replace("\x03", " ")
+		self.text = self.text.replace("\n", " ")
+		self.text = self.text.replace("\x03", " ")
 
 	def import_text(self, text):
 		self.text = text
