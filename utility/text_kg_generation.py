@@ -34,6 +34,7 @@ class kg_construct(info_extractor):
 		self.reader = PdfReader(filepath)
 		page = self.reader.pages[0]
 		self.text = page.extract_text()
+		self.text_origin = self.text
 
 	def text_clean(self):
 		self.text = self.text.replace("\n", " ")
