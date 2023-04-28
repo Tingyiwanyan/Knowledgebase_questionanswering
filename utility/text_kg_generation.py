@@ -34,7 +34,7 @@ class kg_construct(info_extractor):
 		page = reader.pages[0]
 		self.text = page.extract_text()
 
-	def text_clean(self)
+	def text_clean(self):
 		self.text.replace("\n", " ")
 		self.text.replace("\x03", " ")
 
