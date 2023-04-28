@@ -26,8 +26,6 @@ class kg_construct(info_extractor):
 		self.read_pdf(filepath)
 		self.text_clean()
 		self.sentence_divider()
-		self.construct_triples(self.text)
-		self.print_dep_tree(self.text)
 
 
 	def read_pdf(self, filepath):
