@@ -26,6 +26,18 @@ class kg_construct(info_extractor):
 		self.read_pdf(filepath)
 		self.text_clean()
 		self.sentence_divider()
+		valid_sentence = 1
+		for texts in self.sentences:
+			self.construct_triples(texts)
+			if self.sentence_structre['prefix'] == []:
+				valid_sentence = 0
+			if self.sentence_structre['suffix'] == []:
+				valid_sentence = 0
+			if self.sentence_structre['verb_relation'] == []:
+				valid_sentence = 0
+			if not valid_sentence == 0:
+				self.triple_construction(texts)
+			valid_sentence = 1
 
 
 	def read_pdf(self, filepath):
@@ -41,12 +53,13 @@ class kg_construct(info_extractor):
 	def import_text(self, text):
 		self.text = text
 
-	def triple_construction(self):
-		data = request.get_json() # get the json from the post request object
-		source = data['source']
-		relation = data['relation']
+	def triple_construction(self,texts):
+		#data = request.get_json() # get the json from the post request object
+		source  = self.sentence_structre['prefix']
+		#source = data['source']
+		relation = self.sentence_structre['verb_relation']
 		#relation_user = data['relationuser']
-		target = data['target']
+		target = self.sentence_structre['suffix']
 		#id_ = data['id']
 		#time = data['time']
 		columns = ["source","relation","target"]
