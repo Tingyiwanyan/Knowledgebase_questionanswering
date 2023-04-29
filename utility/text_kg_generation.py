@@ -38,6 +38,7 @@ class kg_construct(info_extractor):
 			if not valid_sentence == 0:
 				self.triple_construction(texts)
 			valid_sentence = 1
+			self.purge_sentence_structure()
 
 	def read_pdf(self, filepath):
 		self.reader = PdfReader(filepath)
