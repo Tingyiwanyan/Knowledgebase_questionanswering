@@ -52,13 +52,31 @@ class kg_construct(info_extractor):
 	def import_text(self, text):
 		self.text = text
 
+	def convert_to_text(self,list_text):
+		l = []
+		for x in list_text:
+			l = l + x
+		m_string = ''
+		for x in l:
+			m_string += ' ' + str(x)
+
+		return m_string
+
+
 	def triple_construction(self,texts):
 		#data = request.get_json() # get the json from the post request object
+
 		source  = self.sentence_structure['prefix']
+		source = self.convert_to_text(source)
+		self.check_source = source
 		#source = data['source']
 		relation = self.sentence_structure['verb_relation']
+		relation = self.convert_to_text(relation)
+		self.check_relation = relation
 		#relation_user = data['relationuser']
 		target = self.sentence_structure['suffix']
+		target = self.convert_to_text(target)
+		self.check_target = target
 		#id_ = data['id']
 		#time = data['time']
 		columns = ["source","relation","target"]
