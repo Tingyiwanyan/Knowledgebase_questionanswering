@@ -63,7 +63,7 @@ class kg_construct(info_extractor):
 		#time = data['time']
 		columns = ["source","relation","target"]
 		data = [(source,relation,target)]
-		df_temp = spark.sparkContext.parallelize(data).toDF(columns)
+		df_temp = self.spark.sparkContext.parallelize(data).toDF(columns)
 		tables = self.spark.catalog.listTables("graph_database")
 		if "triple_relation" in [table.name for table in tables]:
 			df_temp.write.mode('append').saveAsTable("graph_database.triple_relation")
