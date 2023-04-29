@@ -39,7 +39,6 @@ class kg_construct(info_extractor):
 				self.triple_construction(texts)
 			valid_sentence = 1
 
-
 	def read_pdf(self, filepath):
 		self.reader = PdfReader(filepath)
 		page = self.reader.pages[0]
