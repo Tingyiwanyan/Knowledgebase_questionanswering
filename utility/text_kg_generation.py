@@ -27,8 +27,8 @@ class kg_construct(info_extractor):
 		self.text_clean()
 		self.sentence_divider()
 		valid_sentence = 1
-		for texts in self.sentences:
-			self.construct_triples(texts)
+		for l in len(self.sentences):
+			self.construct_triples(self.sentences[l])
 			if self.sentence_structure['prefix'] == []:
 				valid_sentence = 0
 			if self.sentence_structure['suffix'] == []:
@@ -36,7 +36,7 @@ class kg_construct(info_extractor):
 			if self.sentence_structure['verb_relation'] == []:
 				valid_sentence = 0
 			if not valid_sentence == 0:
-				self.triple_construction(texts)
+				self.triple_construction(self.sentences[l])
 			valid_sentence = 1
 			self.purge_sentence_structure()
 
