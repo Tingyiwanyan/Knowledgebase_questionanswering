@@ -27,7 +27,7 @@ class kg_construct(info_extractor):
 		self.text_clean()
 		self.sentence_divider()
 		valid_sentence = 1
-		for l in len(self.sentences):
+		for l in range(len(self.sentences)):
 			self.construct_triples(self.sentences[l])
 			if self.sentence_structure['prefix'] == []:
 				valid_sentence = 0
