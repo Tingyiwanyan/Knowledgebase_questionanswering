@@ -29,11 +29,11 @@ class kg_construct(info_extractor):
 		valid_sentence = 1
 		for texts in self.sentences:
 			self.construct_triples(texts)
-			if self.sentence_structre['prefix'] == []:
+			if self.sentence_structure['prefix'] == []:
 				valid_sentence = 0
-			if self.sentence_structre['suffix'] == []:
+			if self.sentence_structure['suffix'] == []:
 				valid_sentence = 0
-			if self.sentence_structre['verb_relation'] == []:
+			if self.sentence_structure['verb_relation'] == []:
 				valid_sentence = 0
 			if not valid_sentence == 0:
 				self.triple_construction(texts)
@@ -54,11 +54,11 @@ class kg_construct(info_extractor):
 
 	def triple_construction(self,texts):
 		#data = request.get_json() # get the json from the post request object
-		source  = self.sentence_structre['prefix']
+		source  = self.sentence_structure['prefix']
 		#source = data['source']
-		relation = self.sentence_structre['verb_relation']
+		relation = self.sentence_structure['verb_relation']
 		#relation_user = data['relationuser']
-		target = self.sentence_structre['suffix']
+		target = self.sentence_structure['suffix']
 		#id_ = data['id']
 		#time = data['time']
 		columns = ["source","relation","target"]
