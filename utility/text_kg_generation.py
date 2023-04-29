@@ -13,7 +13,7 @@ class kg_construct(info_extractor):
 		info_extractor.__init__(self)
 		self.spark = SparkSession.builder.enableHiveSupport().getOrCreate()
 
-		self.spark.sql("CREATE DATABASE IF NOT EXISTS graph_database")
+		#self.spark.sql("CREATE DATABASE IF NOT EXISTS graph_database")
 
 
 	def download_pdf(self, url, filepath):
