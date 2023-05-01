@@ -62,9 +62,12 @@ class kg_construct(info_extractor):
 			l = l + x
 		m_string = ''
 		for x in l:
-			m_string += ' ' + str.lower(x)
+			m_string += ' ' + str.(x)
+		m_string_ = ''
+		for x in m_string:
+			m_string_ += ' ' + str.lower(x)
 
-		return m_string
+		return m_string_
 
 
 	def triple_construction(self,texts):
