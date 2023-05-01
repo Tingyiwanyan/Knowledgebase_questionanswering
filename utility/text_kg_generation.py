@@ -16,6 +16,9 @@ class kg_construct(info_extractor):
 		self.spark.sql("CREATE DATABASE IF NOT EXISTS graph_database")
 
 
+	def drop_table(self):
+		self.spark.sql("drop table graph_database.triple_relation")
+
 	def download_pdf(self, url, filepath):
 		response = urllib.request.urlopen(url)
 		file = open(filepath, "wb")
