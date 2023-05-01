@@ -65,7 +65,7 @@ class kg_construct(info_extractor):
 			m_string += ' ' + str(x)
 		m_string_ = ''
 		for x in m_string:
-			m_string_ += ' ' + str.lower(x)
+			m_string_ += str.lower(x)
 
 		return m_string_
 
