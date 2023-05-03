@@ -1,5 +1,6 @@
 import spacy 
 import numpy as np
+from utility.infor_extraction import info_extractor
 from pyspark.sql import functions as F
 
 class query_matching(info_extractor):
