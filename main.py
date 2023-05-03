@@ -16,6 +16,9 @@ if __name__ == '__main__':
 	text9 = "what is watercycle"
 	text10 = "john scored 98"
 	sample_url = "https://arxiv.org/pdf/2203.02155.pdf"
+	
 
 	kg = kg_construct()
+	df = kg.extract_table()
+
 	#info_ext.entity_matcher()

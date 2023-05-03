@@ -15,6 +15,9 @@ class kg_construct(info_extractor):
 
 		self.spark.sql("CREATE DATABASE IF NOT EXISTS graph_database")
 
+	def extract_table(self):
+		df = self.spark.read.table("graph_database.triple_relation")
+		return df
 
 	def drop_table(self):
 		self.spark.sql("drop table graph_database.triple_relation")
