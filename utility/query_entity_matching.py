@@ -9,7 +9,7 @@ class query_matching(info_extractor):
 	def query_analyze(self,query_text):
 		doc = self.nlp(query_text)
 		for tok in doc:
-      		print(tok.head.text,"-->",tok.text,"-->",tok.dep_,"-->",tok.pos_)
+			print(tok.head.text,"-->",tok.text,"-->",tok.dep_,"-->",tok.pos_)
 
 	
 	def extract_entities(self, dataframe, obj):
