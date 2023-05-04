@@ -46,7 +46,7 @@ class query_matching(info_extractor):
 		target = df['target']
 		sentences = ''
 		for i in range(len(sources)):
-			text = sources[i] ' ' + relation[i] ' '+ target[i]
+			text = sources[i] + ' ' + relation[i] + ' '+ target[i]
 			sentences = sentences + text + '. '
 
 		self.returned_sentences = sentences
