@@ -42,7 +42,7 @@ class query_matching(info_extractor):
 			text = sources[i] + relation[i] + target[i]
 			sentences = sentences + text + '.'
 
-		return senteces
+		return sentences
 
 
 
