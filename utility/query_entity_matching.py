@@ -22,7 +22,7 @@ class query_matching(info_extractor):
 
 		answer_tables = []
 		for entity in self.query_entity:
-			answer_df = df.filter(F.col("target").contains(entity)|F.col("source").contains(entity))
+			answer_df = dataframe.filter(F.col("target").contains(entity)|F.col("source").contains(entity))
 			answer_tables.append(answer_df)
 		if not len(answer_tables) == 1:
 			join_table = answer_tables[0]
