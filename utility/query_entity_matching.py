@@ -49,7 +49,7 @@ class query_matching(info_extractor):
 		self.query_analyze(query_text)
 		self.extract_entities(dataframe)
 		self.return_triple_sentences()
-		if sentences == '':
+		if self.sentences == '':
 			print("There is no information related to the query:")
 			for i in self.query_entity:
 				print(i)
