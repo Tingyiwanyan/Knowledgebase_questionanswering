@@ -9,9 +9,13 @@ class query_matching(info_extractor):
 
 	def query_analyze(self,query_text):
 		doc = self.nlp(query_text)
+		query_entity = []
 		for tok in doc:
 			print(tok.head.text,"-->",tok.text,"-->",tok.dep_,"-->",tok.pos_)
+			if not tok.dep.pos_ == "PRON" and not tok.pos_ == "DET" and not tok.pos_ == "AUX" and not tok.pos_ == "VERB" and not tok.pos_ == "ADV" and not tok.pos_ == "PUNCT" and not tok.pos_ == "ADV":
+				query_entity.append(tok.text)
+		print(tok)
 
-	
+
 	def extract_entities(self, dataframe, obj):
 		self.answer_df = df.filter(F.col("target").contains(obj)|F.col("source").contains(obj))
