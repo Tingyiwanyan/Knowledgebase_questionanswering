@@ -15,7 +15,22 @@ class query_matching(info_extractor):
 			if not tok.pos_ == "PRON" and not tok.pos_ == "DET" and not tok.pos_ == "AUX" and not tok.pos_ == "VERB" and not tok.pos_ == "ADV" and not tok.pos_ == "PUNCT" and not tok.pos_ == "ADV":
 				query_entity.append(tok.text)
 		print(query_entity)
+		self.query_entity = query_entity
 
 
-	def extract_entities(self, dataframe, obj):
-		self.answer_df = df.filter(F.col("target").contains(obj)|F.col("source").contains(obj))
+	def extract_entities(self, dataframe):
+
+		answer_tables = []
+		for entity in self.query_entity:
+			answer_df = df.filter(F.col("target").contains(entity)|F.col("source").contains(entity))
+			answer_tables.append(answer_df)
+		if not len(answer_tables) == 1:
+			join_table = answer_tables[0]
+			for i in range(len(answer_tables)):
+				join_table = join_table.union(answer_tables[i]).dropDuplicates()
+			self.answer_table = join_table
+		else:
+			self.answer_table = answer_tables[0]
+
+	#def return_triple_sentences(self):
+
