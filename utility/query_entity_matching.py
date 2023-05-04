@@ -32,5 +32,20 @@ class query_matching(info_extractor):
 		else:
 			self.answer_table = answer_tables[0]
 
-	#def return_triple_sentences(self):
+	def return_triple_sentences(self):
+		df = self.answer_tables.topandas()
+		sources = df['source']
+		relation = df['relation']
+		target = df['target']
+		sentences = ''
+		for i in range(len(sources)):
+			text = sources[i] + relation[i] + target[i]
+			sentences = sentences + text + '.'
+
+		return senteces
+
+
+
+
+
 
