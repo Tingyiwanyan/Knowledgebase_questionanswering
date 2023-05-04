@@ -24,6 +24,11 @@ class query_matching(info_extractor):
 		for entity in self.query_entity:
 			answer_df = dataframe.filter(F.col("target").contains(entity)|F.col("source").contains(entity))
 			answer_tables.append(answer_df)
+		if answer_tables == []:
+			print("There is no information related to the query:")
+			for i in self.query_entity:
+				print(i)
+			return 0
 		if not len(answer_tables) == 1:
 			join_table = answer_tables[0]
 			for i in range(len(answer_tables)):
@@ -32,6 +37,8 @@ class query_matching(info_extractor):
 		else:
 			self.answer_table = answer_tables[0]
 
+		return 1
+
 	def return_triple_sentences(self):
 		df = self.answer_table.toPandas()
 		sources = df['source']
@@ -39,10 +46,21 @@ class query_matching(info_extractor):
 		target = df['target']
 		sentences = ''
 		for i in range(len(sources)):
-			text = sources[i] + relation[i] + target[i]
-			sentences = sentences + text + '.'
+			text = sources[i] ' ' + relation[i] ' '+ target[i]
+			sentences = sentences + text + '. '
 
-		return sentences
+		self.returned_sentences = sentences
+
+		#return sentences
+
+	def keyword_entity_extraction(self, query_text, dataframe):
+		self.query_analyze(query_text)
+		decision = self.extract_entities(dataframe)
+		if decision == 0:
+			return 0
+		else:
+			self.return_triple_sentences()
+			return self.returned_sentences
 
 
 
