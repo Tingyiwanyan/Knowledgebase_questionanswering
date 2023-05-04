@@ -33,7 +33,7 @@ class query_matching(info_extractor):
 			self.answer_table = answer_tables[0]
 
 	def return_triple_sentences(self):
-		df = self.answer_tables.topandas()
+		df = self.answer_table.topandas()
 		sources = df['source']
 		relation = df['relation']
 		target = df['target']
