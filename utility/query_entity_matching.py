@@ -14,7 +14,7 @@ class query_matching(info_extractor):
 			print(tok.head.text,"-->",tok.text,"-->",tok.dep_,"-->",tok.pos_)
 			if not tok.pos_ == "PRON" and not tok.pos_ == "DET" and not tok.pos_ == "AUX" and not tok.pos_ == "VERB" and not tok.pos_ == "ADV" and not tok.pos_ == "PUNCT" and not tok.pos_ == "ADV":
 				query_entity.append(tok.text)
-		print(tok)
+		print(query_entity)
 
 
 	def extract_entities(self, dataframe, obj):
